@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Box, Button, Container, Text, VStack, HStack } from "@chakra-ui/react";
 
 const Index = () => {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [splits, setSplits] = useState([]);
+  const [bgColor, setBgColor] = useState("#f0e68c");
   const timerRef = useRef(null);
 
   const formatTime = (time) => {
@@ -45,8 +46,23 @@ const Index = () => {
     setSplits([]);
   };
 
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/background-color-reference.png";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.drawImage(img, 0, 0, img.width, img.height);
+      const pixelData = context.getImageData(0, 0, 1, 1).data;
+      const color = `rgb(${pixelData[0]}, ${pixelData[1]}, ${pixelData[2]})`;
+      setBgColor(color);
+    };
+  }, []);
+
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" bg="#f0e68c">
+    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" bg={bgColor}>
       <VStack spacing={4}>
         <Box bg="black" color="white" p={4} borderRadius="md" width="100%" textAlign="center">
           <Text fontSize="4xl" fontFamily="monospace">
