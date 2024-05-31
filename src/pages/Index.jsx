@@ -46,7 +46,7 @@ const Index = () => {
   };
 
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" bg="#f0e68c">
       <VStack spacing={4}>
         <Box bg="black" color="white" p={4} borderRadius="md" width="100%" textAlign="center">
           <Text fontSize="4xl" fontFamily="monospace">
